@@ -1,0 +1,95 @@
+{% load static %}  
+
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+  
+    <meta charset="UTF-8">
+    <title>Haber Küpü</title>
+    <link rel="icon" href="{% static 'images/küp_iconu.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  </head>
+  <body class="d-flex flex-column vh-100">
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 text-end mt-3">
+                    <h1>Haber <img src="{% static 'images/siyah_küp.ico' %}"class="kup" ><br><span style="color: white;">........</span>Küpü</h1>
+                </div>
+                <div class="col-1 text-start mt-4">
+                    <p style="color: darkgrey;font-family:'Times New Roman', Times, serif; font-size: smaller ;">Hoş geldiniz.<br>En güncel<br>haberler burada</p>
+                </div>
+            </div>
+            
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="{% url 'anasayfa' %}">Haber Küpü</a>
+                  
+                  <!-- Hamburger buton -->
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Menüyü Aç/Kapat">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+              
+                  <!-- Menü içeriği -->
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/anasayfa" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Kategoriler
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+                          {% for kategori in kategoriler %}
+                            <li><a class="dropdown-item" href="{% url 'kategori' kategori.id %}">{{ kategori.isim }}</a></li>
+                          {% endfor %}
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/admin">Üye giriş sayfası</a></li>
+                        </ul>
+                      </li>
+                      
+              
+                    </ul>
+              
+                    <!-- Arama çubuğu -->
+                    <form action="{% url 'arama_sonuc'%}" method="get" class="d-flex">
+                      <input class="form-control me-2" type="search" name="q" placeholder="Haber ara" aria-label="Ara">
+                      <button class="btn btn-outline-light" type="submit">Ara</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+              
+        </div>
+
+    </header>
+
+    <main class="flex-grow-1">
+        {% block content %}
+        <!-- Bu alanda içerik olacak -->
+        {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+      <div class="container">
+        <p>&copy; 2025 Tüm Hakları Saklıdır</p>
+        <div>
+          <a href="https://facebook.com" target="_blank" class="text-white mx-3 text-decoration-none">
+            <i class="bi bi-facebook" style="font-size: small;"> HaberKüpü5</i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="text-white mx-3 text-decoration-none">
+            <i class="bi bi-twitter" style="font-size: small;"> HaberKüpü5</i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="text-white mx-3 text-decoration-none">
+            <i class="bi bi-instagram" style="font-size:small;"> HaberKüpü5</i>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html> 
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ haber.baslik }}</h2>
+    <img src="{{ haber.foto.url }}" class="img-fluid mb-4" alt="{{ haber.baslik }}">
+    <p>{{ haber.icerik }}</p>
+    <a href="javascript:history.back()" class="btn btn-secondary">← Geri Dön</a>
+
+</div>
+<hr>
+<div class="container mt-5">
+    <h4>Benzer haberler:</h4>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for haber in diger_haberler %}
+        <div class="col">
+          <div class="card h-100 d-flex flex-column">
+            <img src="{{ haber.foto.url }}" class="card-img-top" alt="Haber görseli">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ haber.baslik }}</h5>
+              <p class="card-text text-truncate" style="max-height: 4.5em; overflow: hidden;">
+                {{ haber.icerik|truncatechars:120}}
+              </p>
+              <div class="mt-auto">
+                <a href="{% url 'detay_sayfa' haber.pk %}" class="btn btn-outline-secondary btn-sm">Devamını Oku</a>
+              </div>
+            </div>
+          </div>        
+        </div>
+      {% endfor %}
+      <div class="text-center" style="margin-top:188px; margin-bottom:188px;">
+        <a href="{% url 'kategori' haber.kategori.id %}" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center"><i class="bi bi-arrow-right-circle-fill" style="font-size:x-large;"> diğer...</i></a> 
+      </div>
+    </div>
+    <div class="mb-5"></div>
+</div>
+{% endblock %}

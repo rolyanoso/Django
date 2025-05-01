@@ -1,0 +1,17 @@
+body header h1{
+    color:rgb(131, 33, 33);
+    font-family:fantasy;
+    font-size:xx-large;
+}
+.kup{
+    width:30px;
+    height:30px;
+}
+.kategoriler{
+    background-color: rgb(188, 118, 118);
+    height: 50px;
+}
+.kategori-yazisi{
+    color: white;
+    margin-top:8px;
+}

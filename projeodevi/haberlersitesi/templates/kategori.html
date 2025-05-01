@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="col">
+        <h2><strong>{{ kategori.isim }}</strong>'le ilgili haberler:</h2><br>
+    </div>
+    {% if not haberler %}
+        <div class="col-12">
+            <p class="alert alert-danger w-100 text-center">Aradığınız kategoride haber bulunamadı.</p>
+        </div>
+    {% else %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for haber in haberler %}
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column ">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ haber.baslik }}</h5>
+                            <img src="{{ haber.foto.url }}" class="card-img-top" alt="Haber görseli">
+                            <p class="card-text text-truncate" style="max-height: 4.5em; overflow: hidden;">
+                            {{ haber.icerik|truncatechars:2000 }}
+                            </p>
+                            <div class="mt-auto">
+                                <a href="{% url 'detay_sayfa' haber.id %}" class="btn btn-outline-secondary btn-sm">Devamını Oku</a>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                
+            {% endfor%}
+        </div>
+    {% endif %}
+    </div>
+    <div class="mb-5"></div>
+</div>
+{% endblock %}
+
+            
